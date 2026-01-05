@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Resumo Pós-Aula — Fátima — CZK English</title>
+
+  <style>
+    :root{
+      --page-bg: #f4f7fa;
+      --card-bg: #fff;
+      --accent: #2f86e6;
+      --accent-dark: #1f6fd1;
+      --green: #36b37e;
+      --muted: #6b7280;
+      --border: #e6eef8;
+      --box-radius: 12px;
+      --card-width: 720px;
+    }
+
+    html,body{
+      height:100%;
+      margin:0;
+      padding:0;
+      background:var(--page-bg);
+      font-family:Inter, "Segoe UI", Roboto, Arial, sans-serif;
+    }
+
+    .wrap{
+      min-height:100%;
+      display:flex;
+      align-items:flex-start;
+      justify-content:center;
+      padding:48px 20px;
+    }
+
+    .card{
+      width:100%;
+      max-width:var(--card-width);
+      background:var(--card-bg);
+      border-radius:18px;
+      padding:28px;
+      box-shadow:0 6px 22px rgba(33,47,60,0.06);
+      border:1px solid rgba(15,33,64,0.03);
+    }
+
+    header{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:12px;
+      margin-bottom:8px;
+    }
+
+    .badge{
+      background:linear-gradient(180deg,#fff,#f2fbff);
+      border:1px solid var(--border);
+      padding:8px 12px;
+      border-radius:999px;
+      color:var(--accent);
+      font-weight:700;
+      font-size:0.85rem;
+    }
+
+    h1{
+      margin:0;
+      font-size:1.3rem;
+      color:#0f1724;
+    }
+
+    .meta{
+      color:var(--muted);
+      font-size:0.92rem;
+      margin-top:6px;
+    }
+
+    .actions{
+      display:flex;
+      gap:10px;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:10px 14px;
+      border-radius:10px;
+      border:none;
+      background:var(--accent);
+      color:#fff;
+      text-decoration:none;
+      font-weight:600;
+      cursor:pointer;
+      box-shadow:0 6px 14px rgba(47,134,230,0.12);
+    }
+
+    .btn.secondary{
+      background:#fff;
+      color:var(--accent);
+      border:1px solid var(--border);
+      box-shadow:none;
+    }
+
+    main{margin-top:18px;}
+    section{margin-top:18px;}
+
+    .panel{
+      background:#fbfdff;
+      border-radius:12px;
+      padding:16px;
+      border:1px solid var(--border);
+    }
+
+    .outline-card{
+      border-radius:10px;
+      border:1px solid var(--border);
+      padding:16px;
+      background:#fff;
+    }
+
+    /* Vocabulary boxes */
+    .vocab-grid{
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+      margin-top:10px;
+    }
+
+    .vocab{
+      flex:1;
+      min-width:220px;
+      border-radius:10px;
+      padding:14px;
+      border:2px solid #dfeefe;
+      background:#fff;
+    }
+
+    .vocab.green{
+      border-color:#c9f3dc;
+      background:#f5fff6;
+    }
+
+    .vocab h3{
+      margin:0;
+      font-size:1rem;
+      color:#154360;
+    }
+
+    .vocab p{
+      margin:8px 0 0 0;
+      color:var(--muted);
+      font-size:0.95rem;
+    }
+
+    /* Transcrição / gravação buttons */
+    .media-row{
+      display:flex;
+      gap:14px;
+      margin-top:12px;
+      flex-wrap:wrap;
+    }
+
+    .media-btn{
+      background:#fff;
+      border:1px solid var(--border);
+      padding:12px 16px;
+      border-radius:10px;
+      font-weight:700;
+      color:var(--accent);
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      min-width:200px;
+      justify-content:center;
+    }
+
+    /* Homework box */
+    .homework{
+      background:#f3fff6;
+      border:1px solid #d7f5df;
+      border-radius:10px;
+      padding:14px;
+      margin-top:10px;
+    }
+
+    /* ===== TALK TIME – TABELA RETANGULAR ===== */
+    .speaking{
+      margin-top:18px;
+      padding:16px;
+      border-radius:12px;
+      background:linear-gradient(180deg,#ffffff,#fbfdff);
+      border:1px solid var(--border);
+      max-width:640px;
+    }
+
+    .speaking h2{
+      margin:0 0 10px 0;
+      font-size:1.05rem;
+      color:#0f1724;
+    }
+
+    .talk-table{
+      width:100%;
+      border-collapse:collapse;
+      border-radius:10px;
+      overflow:hidden;
+      background:#fff;
+      border:1px solid #e1e9f5;
+      font-size:0.9rem;
+    }
+
+    .talk-table th,
+    .talk-table td{
+      padding:8px 10px;
+      text-align:left;
+    }
+
+    .talk-table th{
+      background:#eef4ff;
+      color:#1b3556;
+      font-weight:700;
+      border-bottom:1px solid #dde6fa;
+    }
+
+    .row-teacher{
+      background:#e7f2ff; /* azul clarinho */
+    }
+
+    .row-student{
+      background:#e8f7ef; /* verde clarinho */
+    }
+
+    .talk-label{
+      font-weight:700;
+    }
+
+    .talk-percent{
+      font-weight:700;
+      color:#0f1724;
+    }
+
+    .talk-time{
+      color:var(--muted);
+    }
+
+    footer{
+      margin-top:20px;
+      color:var(--muted);
+      font-size:0.9rem;
+      text-align:center;
+    }
+
+    /* responsive */
+    @media (max-width:720px){
+      .card{padding:18px;border-radius:14px;}
+      .vocab-grid{flex-direction:column;}
+      .media-row{flex-direction:column;}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap" id="top">
+    <article class="card" role="main">
+      <header>
+        <div>
+          <div style="display:flex;gap:10px;align-items:center;">
+            <span class="badge">PÓS-AULA</span>
+            <h1>Retomada + Organização do Método (100% digital)</h1>
+          </div>
+          <div class="meta" style="margin-top:8px;">
+            <strong>Professor:</strong> César &nbsp;•&nbsp;
+            <strong>Aluna:</strong> Fátima &nbsp;•&nbsp;
+            <strong>Data:</strong> 05/01/2026
+          </div>
+        </div>
+
+        <div class="actions">
+          <a class="btn" href="https://youtu.be/FeieYe1KICc" onclick="window.print();return false;">Imprimir / Salvar PDF</a>
+        </div>
+      </header>
+
+      <main>
+        <section class="panel">
+          <p style="margin:0;font-weight:600;color:#08325a;">
+            Aula leve de retomada: combinados do curso, metas, revisão de “personal information” e jogo de vocabulário (Babadum).
+          </p>
+        </section>
+
+        <section>
+          <h2 style="margin-bottom:8px;">Resumo da Aula</h2>
+          <div class="outline-card">
+            <p style="margin:0 0 8px 0;">
+              Hoje fizemos uma aula <strong>bem light</strong> para retomar o inglês e alinhar como o curso vai funcionar.
+              Falamos sobre rotina, expectativas e sobre o método: aulas <strong>gravadas</strong> e <strong>transcritas</strong>,
+              com revisão constante através do <strong>pós-aula</strong>.
+            </p>
+            <p style="margin:0 0 8px 0;">
+              Reforçamos que o formato foi pensado para ser <strong>100% digital</strong>. Você vai precisar apenas de um
+              <strong>caderno (novo)</strong>, lápis, caneta e borracha para a aula e algumas tarefas.
+            </p>
+            <p style="margin:0 0 8px 0;">
+              Também jogamos <strong>Babadum</strong> para medir vocabulário e já criar uma meta de evolução.
+              No final, iniciamos uma retomada do livro em <strong>Personal Information</strong> e combinamos a próxima aula focada em
+              <strong>likes &amp; dislikes</strong> (com variações além de “like / don’t like”).
+            </p>
+            <p style="margin:0;">
+              <strong>Obs:</strong> o <strong>link teste</strong> do pós-aula não encaminha para links seguintes, porque os links de acesso foram retirados.
+            </p>
+          </div>
+        </section>
+
+        <section>
+          <h2 style="margin-bottom:8px;">Key Vocabulary (usado hoje)</h2>
+          <div class="vocab-grid">
+            <div class="vocab">
+              <h3>Single × Married</h3>
+              <p style="margin-top:8px;font-size:0.92rem;color:var(--muted);">
+                <em>(pt) solteira(o) × casada(o)</em><br>
+                <small>I'm single. / I'm married.</small>
+              </p>
+            </div>
+            <div class="vocab green">
+              <h3>Personal Information</h3>
+              <p style="margin-top:8px;font-size:0.92rem;color:var(--muted);">
+                <em>(pt) informações pessoais</em><br>
+                <small>first name • last name • nationality • phone number • email address</small>
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h2 style="margin-bottom:8px;">Vocabulário e prática (Babadum)</h2>
+          <div class="outline-card">
+            <p style="margin:0 0 8px 0;">
+              Jogamos 30 palavras no <strong>Babadum</strong> para medir evolução e criar revisão por repetição.
+            </p>
+            <ul style="margin:0 0 6px 18px;padding:0;font-size:0.94rem;color:var(--muted);">
+              <li><strong>Resultado:</strong> 24/30 ✅</li>
+              <li><strong>Meta:</strong> 30/30 até <strong>04/02/2026</strong></li>
+            </ul>
+          </div>
+        </section>
+
+        <section>
+          <h2 style="margin-bottom:8px;">Pronunciation tip (KN = K “mudo”)</h2>
+          <div class="outline-card">
+            <p style="margin:0 0 8px 0;">
+              Palavras com <strong>KN</strong> normalmente não pronunciam o <strong>K</strong>.
+            </p>
+            <ul style="margin:0 0 0 18px;padding:0;color:var(--muted);font-size:0.94rem;">
+              <li><strong>knock</strong> (bater na porta)</li>
+              <li><strong>knee</strong> (joelho)</li>
+              <li><strong>knight</strong> (cavaleiro) — pronúncia igual a <strong>night</strong> (noite)</li>
+            </ul>
+          </div>
+        </section>
+        <section>
+          <h2 style="margin-bottom:8px;">Vocabulário do jogo (Babadum) — palavras que apareceram</h2>
+          <div class="outline-card">
+            <p style="margin:0 0 10px 0;">
+              Algumas palavras que apareceram no jogo de hoje (para revisar aos poucos, sem pressa):
+            </p>
+            <ul style="margin:0 0 0 18px;padding:0;color:var(--muted);font-size:0.94rem;line-height:1.6;">
+              <li><strong>palm tree</strong> — palmeira</li>
+              <li><strong>run</strong> (to run) — correr</li>
+              <li><strong>outlet</strong> — tomada</li>
+              <li><strong>hot flask</strong> — garrafa térmica</li>
+              <li><strong>ship</strong> — navio</li>
+              <li><strong>sheep</strong> — ovelha</li>
+              <li><strong>tiger</strong> — tigre</li>
+              <li><strong>salt shaker</strong> — saleiro</li>
+              <li><strong>knight</strong> — cavaleiro (som igual a <em>night</em>)</li>
+              <li><strong>drought</strong> — seca (período sem chuva)</li>
+              <li><strong>raincoat</strong> — capa de chuva</li>
+              <li><strong>United Kingdom</strong> — Reino Unido</li>
+              <li><strong>pupil</strong> — aluno(a) / pupila (depende do contexto)</li>
+              <li><strong>scuba diver</strong> — mergulhador(a)</li>
+              <li><strong>washing machine</strong> — máquina de lavar</li>
+              <li><strong>dog collar</strong> — coleira de cachorro</li>
+              <li><strong>to swim</strong> — nadar</li>
+              <li><strong>to knock</strong> — bater (na porta)</li>
+              <li><strong>to shout</strong> — gritar</li>
+              <li><strong>spinning top</strong> — pião</li>
+            </ul>
+          </div>
+        </section>
+
+
+        <section>
+          <h2 style="margin-bottom:8px;">Personal Information (retomada)</h2>
+          <div class="outline-card">
+            <p style="margin:0 0 10px 0;">
+              Relembramos vocabulário básico de informações pessoais:
+            </p>
+            <ul style="margin:0 0 0 18px;padding:0;color:var(--muted);font-size:0.94rem;">
+              <li><strong>first name</strong> / <strong>last name</strong></li>
+              <li><strong>single</strong> / <strong>married</strong></li>
+              <li><strong>nationality</strong> (ex.: “I am from Brazil” como apoio)</li>
+              <li><strong>phone number</strong> / <strong>email address</strong> / <strong>address</strong></li>
+            </ul>
+          </div>
+        </section>
+
+        <section>
+          <h2 style="margin-bottom:8px;">Transcrição &amp; Gravação</h2>
+          <div class="media-row">
+            <a
+              class="media-btn"
+              href="https://youtu.be/FeieYe1KICc" target="_blank" rel="noopener noreferrer"
+              role="button"
+              style="background:linear-gradient(180deg,#1f6fd1,#2f86e6);color:#fff;border:none;min-width:260px;"
+              
+              title="Assistir gravação da aula"
+            >
+              🎥 Assistir gravação da aula
+            </a>
+          </div>
+        </section>
+
+        <section class="speaking" aria-label="Distribuição de fala">
+          <h2>Tempo de Fala (Talk Time)</h2>
+          <table class="talk-table">
+            <thead>
+              <tr>
+                <th>Quem falou</th>
+                <th>Porcentagem</th>
+                <th>Duração aproximada</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="row-teacher">
+                <td><span class="talk-label">César (Professor)</span></td>
+                <td><span class="talk-percent">82%</span></td>
+                <td class="talk-time">~49 minutos</td>
+              </tr>
+              <tr class="row-student">
+                <td><span class="talk-label">Fátima</span></td>
+                <td><span class="talk-percent">18%</span></td>
+                <td class="talk-time">~11 minutos</td>
+              </tr>
+            </tbody>
+          </table>
+          <p style="margin:10px 0 0 0;color:var(--muted);font-size:0.9rem;">
+            (Estimativa baseada na proporção de fala observada na transcrição da aula.)
+          </p>
+        </section>
+
+        <section>
+          <h2 style="margin-bottom:8px;">Homework</h2>
+          <div class="homework">
+            <p style="margin:0 0 8px 0;">
+              📌 <strong>Lição de casa (para a próxima aula — 07/01):</strong>
+            </p>
+            <ul style="margin:0 0 6px 18px;padding:0;font-size:0.94rem;color:var(--muted);">
+              <li>Trazer <strong>2 coisas que você gosta</strong> e <strong>2 coisas que você não gosta</strong> em inglês.</li>
+              <li>Evitar usar só <strong>like</strong> e <strong>don’t like</strong>. Trazer variações (ex.: <strong>love, adore, enjoy</strong> / <strong>hate, dislike, can’t stand</strong>).</li>
+              <li>Pesquisar (bem rápido): diferença entre <strong>noun</strong> (substantivo), <strong>verb</strong> (verbo) e <strong>adjective</strong> (adjetivo).</li>
+              <li>Jogar <strong>5 a 10 minutos</strong> de Babadum quando abrir o pós-aula (repetição ajuda a fixar).</li>
+            </ul>
+            <p style="margin:6px 0 0 0;">
+              <a
+                href="https://babadum.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn secondary"
+                style="padding:8px 12px;border-radius:8px;font-weight:700;"
+              >
+                🎮 Abrir tarefa de casa (Babadum)
+              </a>
+            </p>
+          </div>
+
+          <div style="margin-top:14px;">
+            <a class="btn" href="https://wa.me" style="background:#25D366;border-radius:10px;box-shadow:none;">
+              💬 Falar comigo no WhatsApp
+            </a>
+          </div>
+        </section>
+
+      
+        <div style="margin-top:18px;text-align:center;">
+          <a href="#top" class="btn secondary" style="border-radius:10px;">
+            ⬆️ Voltar ao topo
+          </a>
+        </div>
+
+      </main>
+
+      <footer>
+        <p style="margin:18px 0 0 0;color:var(--muted);font-size:0.9rem;">
+          © 2026 CZK English • Este conteúdo é exclusivo para fins educacionais. • Suporte: czkenglish@gmail.com
+        </p>
+      </footer>
+    </article>
+  </div>
+</body>
+</html>
